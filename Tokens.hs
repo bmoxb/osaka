@@ -1,6 +1,7 @@
 module Tokens where
 
-data Token = IdentTok String
+data Token = LetTok
+           | IdentTok String
            | IntTok Int
            | FloatTok Float
            | AddTok
@@ -9,4 +10,9 @@ data Token = IdentTok String
            | SlashTok
            | OpenBracketTok
            | CloseBracketTok
+           | OpenCurlyTok
+           | CloseCurlyTok
+           | EqualsTok
+           | SemicolonTok
+           | CommaTok
            deriving (Show)

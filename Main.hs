@@ -11,5 +11,5 @@ main = do
     text <- readFile (last args)
     print (toAst text)
 
-toAst :: String -> Expr
+toAst :: String -> Stat
 toAst = parse . alexScanTokens
