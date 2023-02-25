@@ -2,3 +2,4 @@
 *.hi
 Parser.hs
 Lexer.hs
+Main
