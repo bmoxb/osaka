@@ -9,3 +9,4 @@ data Token = IdentTok String
            | SlashTok
            | OpenBracketTok
            | CloseBracketTok
+           deriving (Show)

@@ -1,3 +1,4 @@
 *.o
 *.hi
 Parser.hs
+Lexer.hs
