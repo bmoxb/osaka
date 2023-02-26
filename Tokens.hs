@@ -3,6 +3,8 @@ module Tokens where
 data Token = LetTok
            | FnTok
            | MutTok
+           | IfTok
+           | ElseTok
            | RecordTok
            | IdentTok String
            | IntTok Int

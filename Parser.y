@@ -13,6 +13,8 @@ import Ast
     let    { LetTok }
     fn     { FnTok }
     mut    { MutTok }
+    if     { IfTok }
+    else   { ElseTok }
     record { RecordTok }
     ident  { IdentTok $$ }
     int    { IntTok $$ }
@@ -46,6 +48,8 @@ Program : {- empty -} { [] }
 
 Stat : Expr ';'                            { ExprStat $1 }
      | let ident ':' DataType '=' Expr ';' { LetStat $2 $4 $6 }
+     | if Expr Block                       { IfStat $2 $3 }
+     | if Expr Block else Block            { IfElseStat $2 $3 $5 }
      | fn ident FunctionSig Block          { FunctionStat $2 $3 $4 }
      | record ident '{' '}'                { RecordStat $2 [] }
      | record ident '{' RecordMembers '}'  { RecordStat $2 $4 }

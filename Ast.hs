@@ -4,6 +4,8 @@ import Numeric.Natural
 
 data Stat = ExprStat Expr
           | LetStat String DataType Expr
+          | IfStat Expr Block
+          | IfElseStat Expr Block Block
           | FunctionStat String FunctionSig Block
           | RecordStat String [RecordMember]
           deriving (Show)
