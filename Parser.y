@@ -38,9 +38,9 @@ import Ast
 
 %%
 
-Stat : Expr ';'                   { ExprStat $1 }
-     | let ident '=' Expr ';'     { LetStat $2 $4 }
-     | fn ident FunctionSig Block { FunctionStat $2 $3 $4 }
+Stat : Expr ';'                            { ExprStat $1 }
+     | let ident ':' DataType '=' Expr ';' { LetStat $2 $4 $6 }
+     | fn ident FunctionSig Block          { FunctionStat $2 $3 $4 }
 
 FunctionSig : '(' ')'                      { ([], Nothing) }
             | '(' ')' '->' DataType        { ([], Just $4) }

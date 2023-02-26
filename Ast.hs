@@ -3,7 +3,7 @@ module Ast where
 import Numeric.Natural
 
 data Stat = ExprStat Expr
-          | LetStat String Expr
+          | LetStat String DataType Expr
           | FunctionStat String FunctionSig Block
           deriving (Show)
 
