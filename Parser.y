@@ -39,6 +39,9 @@ import Ast
 
 %%
 
+Program : {- empty -} { [] }
+        | Stats       { $1 }
+
 Stat : Expr ';'                            { ExprStat $1 }
      | let ident ':' DataType '=' Expr ';' { LetStat $2 $4 $6 }
      | fn ident FunctionSig Block          { FunctionStat $2 $3 $4 }

@@ -8,8 +8,12 @@ import Ast
 
 main = do
     args <- getArgs
-    text <- readFile (last args)
+    text <- getInput args
     print (toAst text)
 
-toAst :: String -> Stat
+getInput :: [String] -> IO String
+getInput (f:_) = readFile f
+getInput _ = getLine
+
+toAst :: String -> [Stat]
 toAst = parse . alexScanTokens
