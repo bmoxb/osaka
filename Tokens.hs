@@ -6,6 +6,7 @@ data Token = LetTok
            | IfTok
            | ElseTok
            | RecordTok
+           | UnionTok
            | IdentTok String
            | IntTok Int
            | FloatTok Float

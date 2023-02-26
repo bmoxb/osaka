@@ -8,6 +8,7 @@ data Stat = ExprStat Expr
           | IfElseStat Expr Block Block
           | FunctionStat String FunctionSig Block
           | RecordStat String [RecordMember]
+          | UnionStat String [UnionVariant]
           deriving (Show)
 
 data Expr = AddExpr Expr Expr
@@ -29,6 +30,10 @@ data DataType = IdentType String
               deriving (Show)
 
 data Mutability = Mutable | Immutable deriving (Show)
+
+data UnionVariant = IdentVariant String
+                  | RecordLikeVariant String [RecordMember]
+                  deriving (Show)
 
 type FunctionSig = ([Parameter], Maybe DataType)
 

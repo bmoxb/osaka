@@ -17,6 +17,7 @@ tokens :-
     "if"                       { \s -> IfTok }
     "else"                     { \s -> ElseTok }
     "record"                   { \s -> RecordTok }
+    "union"                    { \s -> UnionTok }
     $alpha [$alpha $digit \_]* { \s -> IdentTok s }
     $digit+ \. $digit+         { \s -> FloatTok (read s) }
     $digit+                    { \s -> IntTok (read s) }

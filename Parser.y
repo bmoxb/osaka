@@ -16,6 +16,7 @@ import Ast
     if     { IfTok }
     else   { ElseTok }
     record { RecordTok }
+    union  { UnionTok }
     ident  { IdentTok $$ }
     int    { IntTok $$ }
     float  { FloatTok $$ }
@@ -53,6 +54,8 @@ Stat : Expr ';'                            { ExprStat $1 }
      | fn ident FunctionSig Block          { FunctionStat $2 $3 $4 }
      | record ident '{' '}'                { RecordStat $2 [] }
      | record ident '{' RecordMembers '}'  { RecordStat $2 $4 }
+     | union ident '{' '}'                 { UnionStat $2 [] }
+     | union ident '{' UnionVariants '}'   { UnionStat $2 $4 }
 
 FunctionSig : '(' ')'                      { ([], Nothing) }
             | '(' ')' '->' DataType        { ([], Just $4) }
@@ -61,10 +64,16 @@ FunctionSig : '(' ')'                      { ([], Nothing) }
 
 Block : '{' '}'            { ([], Nothing) }
       | '{' Stats '}'      { ($2, Nothing) }
---      | '{' Stats Expr '}' { ($2, Just $3) }
+--    | '{' Stats Expr '}' { ($2, Just $3) }
 
 RecordMembers : ident ':' DataType                   { [($1, $3)] }
               | ident ':' DataType ',' RecordMembers { ($1, $3):$5 }
+
+UnionVariant : ident                       { IdentVariant $1 }
+             | ident '{' RecordMembers '}' { RecordLikeVariant $1 $3 }
+
+UnionVariants : UnionVariant                   { [$1] }
+              | UnionVariant ',' UnionVariants { $1:$3 }
 
 Stats : Stat       { [$1] }
       | Stat Stats { $1:$2 }
