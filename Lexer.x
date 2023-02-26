@@ -12,6 +12,8 @@ tokens :-
     $white+                    ;
     "//".*                     ;
     "let"                      { \s -> LetTok }
+    "fn"                       { \s -> FnTok }
+    "mut"                      { \s -> MutTok }
     $alpha [$alpha $digit \_]* { \s -> IdentTok s }
     $digit+ \. $digit+         { \s -> FloatTok (read s) }
     $digit+                    { \s -> IntTok (read s) }
@@ -24,5 +26,8 @@ tokens :-
     \{                         { \s -> OpenCurlyTok }
     \}                         { \s -> CloseCurlyTok }
     =                          { \s -> EqualsTok }
+    \:                         { \s -> ColonTok }
     \;                         { \s -> SemicolonTok }
     \,                         { \s -> CommaTok }
+    &                          { \s -> AmpersandTok }
+    \->                        { \s -> ArrowTok }

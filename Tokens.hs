@@ -1,6 +1,8 @@
 module Tokens where
 
 data Token = LetTok
+           | FnTok
+           | MutTok
            | IdentTok String
            | IntTok Int
            | FloatTok Float
@@ -13,6 +15,9 @@ data Token = LetTok
            | OpenCurlyTok
            | CloseCurlyTok
            | EqualsTok
+           | ColonTok
            | SemicolonTok
            | CommaTok
+           | AmpersandTok
+           | ArrowTok
            deriving (Show)
