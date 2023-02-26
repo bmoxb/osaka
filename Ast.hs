@@ -13,6 +13,7 @@ data Expr = BinOpExpr Expr BinOp Expr
           | FloatLiteralExpr Float
           | IdentExpr String
           | FunctionCallExpr String [Expr]
+          | AnonFunctionExpr FunctionSig Block
           deriving (Show)
 
 data BinOp = Add | Sub | Mul | Div deriving (Show)
