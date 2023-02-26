@@ -31,4 +31,5 @@ tokens :-
     \;                         { \s -> SemicolonTok }
     \,                         { \s -> CommaTok }
     &                          { \s -> AmpersandTok }
+    \~                         { \s -> TildeTok }
     \->                        { \s -> ArrowTok }

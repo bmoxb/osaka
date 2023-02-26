@@ -30,10 +30,12 @@ import Ast
     ';'    { SemicolonTok }
     ','    { CommaTok }
     '&'    { AmpersandTok }
+    '~'    { TildeTok }
     '->'   { ArrowTok }
 
 %left '+' '-'
 %left '*' '/'
+%right '~'
 %left ident
 %left '('
 
@@ -82,13 +84,13 @@ DataType : ident                              { IdentType $1 }
 DataTypes : DataType               { [$1] }
           | DataType ',' DataTypes { $1:$3 }
 
-Expr : Expr '+' Expr        { BinOpExpr $1 Add $3 }
-     | Expr '-' Expr        { BinOpExpr $1 Sub $3 }
-     | Expr '*' Expr        { BinOpExpr $1 Mul $3 }
-     | Expr '/' Expr        { BinOpExpr $1 Div $3 }
+Expr : Expr '+' Expr        { AddExpr $1 $3 }
+     | Expr '-' Expr        { SubExpr $1 $3 }
+     | Expr '*' Expr        { MulExpr $1 $3 }
+     | Expr '/' Expr        { DivExpr $1 $3 }
      | int                  { IntLiteralExpr $1 }
      | float                { FloatLiteralExpr $1 }
-     --| '-' Expr            { UnaryOpExpr Negate $2 }
+     | '~' Expr             { NegateExpr $2 }
      | '(' Expr ')'         { $2 }
      | ident                { IdentExpr $1 }
      | ident '(' ')'        { FunctionCallExpr $1 [] }

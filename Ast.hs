@@ -8,18 +8,17 @@ data Stat = ExprStat Expr
           | RecordStat String [RecordMember]
           deriving (Show)
 
-data Expr = BinOpExpr Expr BinOp Expr
-          | UnaryOpExpr UnaryOp Expr
+data Expr = AddExpr Expr Expr
+          | SubExpr Expr Expr
+          | MulExpr Expr Expr
+          | DivExpr Expr Expr
+          | NegateExpr Expr
           | IntLiteralExpr Int
           | FloatLiteralExpr Float
           | IdentExpr String
           | FunctionCallExpr String [Expr]
           | AnonFunctionExpr FunctionSig Block
           deriving (Show)
-
-data BinOp = Add | Sub | Mul | Div deriving (Show)
-
-data UnaryOp = Negate deriving (Show)
 
 data DataType = IdentType String
               | PtrType Mutability DataType

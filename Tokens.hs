@@ -20,5 +20,6 @@ data Token = LetTok
            | SemicolonTok
            | CommaTok
            | AmpersandTok
+           | TildeTok
            | ArrowTok
            deriving (Show)
