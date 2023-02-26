@@ -14,6 +14,7 @@ tokens :-
     "let"                      { \s -> LetTok }
     "fn"                       { \s -> FnTok }
     "mut"                      { \s -> MutTok }
+    "record"                   { \s -> RecordTok }
     $alpha [$alpha $digit \_]* { \s -> IdentTok s }
     $digit+ \. $digit+         { \s -> FloatTok (read s) }
     $digit+                    { \s -> IntTok (read s) }

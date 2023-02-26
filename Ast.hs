@@ -5,6 +5,7 @@ import Numeric.Natural
 data Stat = ExprStat Expr
           | LetStat String DataType Expr
           | FunctionStat String FunctionSig Block
+          | RecordStat String [RecordMember]
           deriving (Show)
 
 data Expr = BinOpExpr Expr BinOp Expr
@@ -31,5 +32,7 @@ data Mutability = Mutable | Immutable deriving (Show)
 type FunctionSig = ([Parameter], Maybe DataType)
 
 type Block = ([Stat], Maybe Expr)
+
+type RecordMember = (String, DataType)
 
 type Parameter = (Mutability, String, DataType)
