@@ -23,7 +23,7 @@ data UnaryOp = Negate deriving (Show)
 data DataType = IdentType String
               | PtrType Mutability DataType
               | TupleType [DataType]
-              | FunctionType FunctionSig
+              | FunctionType [DataType] (Maybe DataType)
               deriving (Show)
 
 data Mutability = Mutable | Immutable deriving (Show)

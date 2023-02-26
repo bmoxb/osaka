@@ -60,12 +60,15 @@ Param : ident ':' DataType     { (Immutable, $1, $3) }
 Params : Param            { [$1] }
        | Param ',' Params { $1:$3 }
 
-DataType : ident             { IdentType $1 }
-         | '&' DataType      { PtrType Immutable $2 }
-         | '&' mut DataType  { PtrType Mutable $3 }
-         | '(' ')'           { TupleType [] }
-         | '(' DataTypes ')' { TupleType $2 }
-         | fn FunctionSig    { FunctionType $2 }
+DataType : ident                              { IdentType $1 }
+         | '&' DataType                       { PtrType Immutable $2 }
+         | '&' mut DataType                   { PtrType Mutable $3 }
+         | '(' ')'                            { TupleType [] }
+         | '(' DataTypes ')'                  { TupleType $2 }
+         | fn '(' ')'                         { FunctionType [] Nothing }
+         | fn '(' ')' '->' DataType           { FunctionType [] (Just $5) }
+         | fn '(' DataTypes ')'               { FunctionType $3 Nothing }
+         | fn '(' DataTypes ')' '->' DataType { FunctionType $3 (Just $6) }
 
 DataTypes : DataType               { [$1] }
           | DataType ',' DataTypes { $1:$3 }
